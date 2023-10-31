@@ -36,7 +36,7 @@
 
                         case command.startsWith('login'):
                         this.push(function(password) {
-                                if (password === 'password') {
+                                if (password === 'SeeNoEvil') {
                                     this.passwordEntered = true;
                                     this.echo('Access Granted');
                                 } else {
@@ -87,7 +87,16 @@
                             var args = command.split(' ');
                             if (args.length > 1) {
                                 var filename = args[1];
-                                if (filename.endsWith('.js')) {
+                                if (filename.endsWith('.log')) {
+                                    // If the file is a log file, load and execute it
+                                    $.getScript(filename)
+                                        .done(function(script, textStatus) {
+                                            this.echo('Loading Video Log...');
+                                        }.bind(this))
+                                        .fail(function(jqxhr, settings, exception) {
+                                            this.echo('Failed to load script: ' + exception);
+                                        }.bind(this));
+                                } else if (filename.endsWith('.js')) {
                                     // If the file is a JavaScript file, load and execute it
                                     $.getScript(filename)
                                         .done(function(script, textStatus) {

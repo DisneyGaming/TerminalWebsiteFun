@@ -14,19 +14,45 @@ function openEmbed() {
     // Create a new iframe element for the embed
     var iframe = document.createElement('iframe');
 
-    // Set the iframe's source to the embed URL
-    iframe.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
+    // Set the iframe's source to the embed URL with autoplay enabled and controls hidden
+    iframe.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0';
 
-    // Set the iframe's style so it appears in the center of the div
+    // Set the iframe's style so it appears in the center of the div and is a bit bigger
     iframe.style.position = 'absolute';
     iframe.style.top = '50%';
     iframe.style.left = '50%';
-    iframe.style.width = '560px';
-    iframe.style.height = '315px';
+    iframe.style.width = '1000px';
+    iframe.style.height = '650px';
     iframe.style.transform = 'translate(-50%, -50%)';
 
     // Append the iframe to the div
     div.appendChild(iframe);
+
+    // Create a new button element for the X button
+    var closeButton = document.createElement('button');
+
+    // Set the button's text to 'X'
+    closeButton.innerHTML = 'X';
+
+    // Set the button's style so it appears in the top right corner of the div
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '0';
+    closeButton.style.right = '0';
+    closeButton.style.backgroundColor = 'red';
+    closeButton.style.color = 'white';
+    closeButton.style.border = 'none';
+    closeButton.style.padding = '5px 10px';
+    closeButton.style.fontSize = '20px';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.zIndex = '1001'; // Add z-index property to ensure it appears on top
+
+    // Add an event listener to the button to remove the div from the document when clicked
+    closeButton.addEventListener('click', function() {
+        document.body.removeChild(div);
+    });
+
+    // Append the button to the div
+    div.appendChild(closeButton);
 
     // Append the div to the body of the document
     document.body.appendChild(div);
